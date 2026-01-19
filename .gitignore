@@ -14,7 +14,6 @@ __pycache__/
 
 # Data (Too large for GitHub)
 sensor.csv
-processed_data.parquet
 
 # OS specific
 .DS_Store

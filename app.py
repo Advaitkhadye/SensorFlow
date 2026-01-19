@@ -29,16 +29,17 @@ with st.sidebar:
     )
     
     # Download option for the dataset
-    with open("sensor.csv", "rb") as file:
-        st.download_button(
-            label="Dataset Used (sensor.csv)",
-            data=file,
-            file_name="sensor.csv",
-            mime="text/csv"
-        )
+    if os.path.exists("sensor.csv"):
+        with open("sensor.csv", "rb") as file:
+            st.download_button(
+                label="Dataset Used (sensor.csv)",
+                data=file,
+                file_name="sensor.csv",
+                mime="text/csv"
+            )
     
     DATA_PATH = 'sensor.csv'
-    DATA_FILE = DATA_PATH
+    DATA_FILE = DATA_PATH if os.path.exists(DATA_PATH) else None
 
     st.markdown("---")
     st.markdown("### About")
