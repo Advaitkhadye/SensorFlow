@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+.env
+
+# Streamlit
+.streamlit/
+
+# IntejliJ / VSCode
+.idea/
+.vscode/
+
+# Data (Too large for GitHub)
+sensor.csv
+processed_data.parquet
+
+# OS specific
+.DS_Store
+Thumbs.db
