@@ -95,6 +95,19 @@ def get_custom_css():
             box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
         }
 
+        /* Link Button Styling (Match Info Box) */
+        .stLinkButton a {
+            background-color: #e0f2fe; /* Light Blue */
+            color: #0f172a !important;
+            border: 1px solid #bae6fd;
+            border-radius: 4px;
+            transition: all 0.2s;
+        }
+        .stLinkButton a:hover {
+            background-color: #bae6fd;
+            border-color: #7dd3fc;
+        }
+
         /* Hide Streamlit Anchor Links */
         [data-testid="stHeaderActionElements"],
         .anchor-link {

@@ -28,7 +28,7 @@ with st.sidebar:
         "This project analyzes the `sensor.csv` dataset to predict machine failures."
     )
     # Download option for the dataset
-    st.link_button("View on Kaggle", "https://www.kaggle.com/datasets/nphantawee/pump-sensor-data")
+    st.link_button("View dataset on Kaggle", "https://www.kaggle.com/datasets/nphantawee/pump-sensor-data")
     if os.path.exists("sensor.csv"):
         with open("sensor.csv", "rb") as file:
             st.download_button(
