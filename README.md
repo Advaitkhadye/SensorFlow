@@ -1,7 +1,5 @@
 # SensorFlow: Anomaly Detection
 
-Hey there! Welcome to **SensorFlow**.
-
 This is a data dashboard designed to help engineers monitoring water pumps (or really, any machine with sensors) figure out **when and why** things are breaking.
 
 Instead of staring at 50 different charts for 50 different sensors, this app does the heavy lifting for you. It uses **Principal Component Analysis (PCA)** to crunch all that noisy data into a simple "Health Score."
