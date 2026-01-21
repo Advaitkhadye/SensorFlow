@@ -5,6 +5,7 @@ import plotly.express as px
 from src.data_loader import load_data, get_basic_stats
 from src.processing import clean_column_names, get_sensor_columns, calculate_correlations
 from src.components import render_kpi_card, plot_sensor_correlation, plot_timeline
+from src.anomaly_insights import render_anomaly_insights
 from src.styles import get_custom_css
 
 # Page Configuration
@@ -29,14 +30,7 @@ with st.sidebar:
     )
     # Download option for the dataset
     st.link_button("View dataset on Kaggle", "https://www.kaggle.com/datasets/nphantawee/pump-sensor-data")
-    if os.path.exists("sensor.csv"):
-        with open("sensor.csv", "rb") as file:
-            st.download_button(
-                label="Dataset Used (sensor.csv)",
-                data=file,
-                file_name="sensor.csv",
-                mime="text/csv"
-            )
+
     
     DATA_PATH = 'sensor.csv'
     DATA_FILE = DATA_PATH if os.path.exists(DATA_PATH) else None
@@ -96,7 +90,11 @@ if not df.empty:
     st.markdown("---")
 
     # Tabs Navigation
-    tab_overview, tab_deepdive, tab_anomalies, tab_ai = st.tabs(["Overview", "Deep Dive", "Anomaly Detection", "AI Health Space"])
+    tab_overview, tab_deepdive, tab_anomalies, tab_ai, tab_insights = st.tabs(["Overview", "Deep Dive", "Anomaly Detection", "AI Health Space", "Anomaly Insights"])
+    
+    # Tab 5: Anomaly Insights
+    with tab_insights:
+        render_anomaly_insights(df)
 
     # Tab 1: Overview
     with tab_overview:
