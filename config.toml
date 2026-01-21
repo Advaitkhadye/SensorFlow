@@ -1,0 +1,16 @@
+[project]
+name = "SensorFlow"
+version = "1.0.0"
+
+[etl]
+pca_components = 2
+anomaly_threshold_std = 2.0
+
+[business]
+cost_per_minute = 500
+currency_symbol = "$"
+
+[ui]
+max_rows_display = 1000
+chart_height = 400
+theme_color = "#3b82f6"

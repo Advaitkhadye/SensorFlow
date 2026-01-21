@@ -4,6 +4,7 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.decomposition import PCA
 import logging
 import os
+import joblib
 
 # Logging Configuration
 logging.basicConfig(
@@ -13,11 +14,16 @@ logging.basicConfig(
 logger = logging.getLogger("SensorFlow_ETL")
 
 class ReliabilityPipeline:
-    def __init__(self, input_path='sensor.csv', output_path='processed_data.parquet'):
+    def __init__(self, input_path='sensor.csv', output_path='processed_data.parquet', model_dir='models'):
         self.input_path = input_path
         self.output_path = output_path
+        self.model_dir = model_dir
         self.scaler = StandardScaler()
         self.pca = PCA(n_components=2)
+        
+        # Ensure model directory exists
+        if not os.path.exists(self.model_dir):
+            os.makedirs(self.model_dir)
         
     def load_data(self):
         """Loads and cleans the initial dataset."""
@@ -71,6 +77,15 @@ class ReliabilityPipeline:
         logger.info("Preprocessing complete.")
         return df
 
+    def save_models(self):
+        """Persists MLOps artifacts."""
+        scaler_path = os.path.join(self.model_dir, 'scaler.joblib')
+        pca_path = os.path.join(self.model_dir, 'pca.joblib')
+        
+        logger.info(f"Saving MLOps artifacts to {self.model_dir}...")
+        joblib.dump(self.scaler, scaler_path)
+        joblib.dump(self.pca, pca_path)
+
     def run(self):
         """Executes the full pipeline."""
         df = self.load_data()
@@ -78,6 +93,8 @@ class ReliabilityPipeline:
         
         logger.info(f"Saving processed data to {self.output_path}...")
         df_clean.to_parquet(self.output_path, index=False)
+        
+        self.save_models()
         logger.info("Pipeline finished successfully.")
 
 if __name__ == "__main__":
